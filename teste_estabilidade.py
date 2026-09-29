@@ -10,7 +10,12 @@ from concurrent.futures import Future
 class EstabilidadeNFC(unittest.TestCase):
     def setUp(self):
         self.manager = NFCManager()
-        self.names = list(LEITORES)
+        # Estes cenarios isolam falhas e recuperacao entre dois leitores.
+        slots = dict(list(LEITORES.items())[:2])
+        configuracao = patch('nfc.manager.LEITORES', slots)
+        configuracao.start()
+        self.addCleanup(configuracao.stop)
+        self.names = list(slots)
         self.manager._resolvedor = Mock()
         self.manager._resolvedor.resolver.return_value = dict.fromkeys(self.names, 'reader')
         self.manager._atualizar = Mock()
