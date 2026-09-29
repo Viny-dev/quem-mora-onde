@@ -1,0 +1,942 @@
+* {
+  box-sizing: border-box;
+}
+
+.game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1000px;
+  min-height: 600px;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #102f72;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.03)
+    ),
+    url("/bairro.png");
+
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+/* ================================
+   CABEÇALHO
+================================ */
+
+.game-header {
+  position: absolute;
+  z-index: 5;
+
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 2px 22px;
+}
+
+.house-icon {
+  font-size: 48px;
+}
+
+.title h1 {
+  margin: 0;
+
+  color: white;
+
+  font-size: clamp(34px, 4vw, 68px);
+  font-weight: 1000;
+
+  letter-spacing: -2px;
+
+  -webkit-text-stroke: 4px #073d92;
+
+  paint-order: stroke fill;
+
+  text-shadow:
+    0 7px 0 #062b72,
+    0 10px 12px rgba(0, 0, 0, 0.25);
+}
+
+.title h1 span {
+  color: #ffb414;
+
+  -webkit-text-stroke-color: #9c3500;
+}
+
+.subtitle {
+  margin-top: 5px;
+
+  padding: 8px 40px;
+
+  background: linear-gradient(
+    #f7b64c,
+    #e58a20
+  );
+
+  border: 4px solid #9b5217;
+  border-radius: 13px;
+
+  color: #15213c;
+
+  font-size: 17px;
+  font-weight: 1000;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    0 4px 0 rgba(104, 54, 14, 0.4);
+}
+
+/* ================================
+   PISTAS
+================================ */
+
+.clues-card {
+  position: absolute;
+  z-index: 4;
+
+  left: 2.2vw;
+  top: 20vh;
+
+  width: min(44vw, 780px);
+
+  padding:
+    clamp(38px, 5vh, 62px)
+    25px
+    18px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border: 5px solid #0874d1;
+  border-radius: 25px;
+
+  box-shadow:
+    0 7px 0 rgba(4, 62, 129, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.wood-title {
+  position: absolute;
+
+  top: -31px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 75%;
+
+  padding: 11px 15px;
+
+  text-align: center;
+
+  color: #172442;
+
+  font-size: clamp(16px, 1.4vw, 24px);
+  font-weight: 1000;
+
+  background:
+    linear-gradient(
+      #ffc461,
+      #e99a31
+    );
+
+  border: 4px solid #a7591c;
+  border-radius: 14px;
+
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.35),
+    0 4px 0 rgba(112, 56, 12, 0.3);
+}
+
+.clues {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 0.45vh, 8px);
+}
+
+.clue {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 29px;
+}
+
+.clue-number {
+  width: 30px;
+  height: 30px;
+
+  flex: 0 0 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.clue p {
+  margin: 0;
+
+  color: #143878;
+
+  font-size: clamp(12px, 1.05vw, 18px);
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.color-0 {
+  background: #ef2929;
+}
+
+.color-1 {
+  background: #1688df;
+}
+
+.color-2 {
+  background: #15984b;
+}
+
+.color-3 {
+  background: #f0a51b;
+}
+
+.color-4 {
+  background: #8039df;
+}
+
+.color-5 {
+  background: #174e9c;
+}
+
+.color-6 {
+  background: #e62945;
+}
+
+/* ================================
+   CRONÔMETRO
+================================ */
+
+.timer-card {
+  position: absolute;
+  z-index: 4;
+
+  top: 11vh;
+  right: 2.4vw;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 230px;
+
+  padding: 10px 20px;
+
+  background: linear-gradient(
+    #ffd85b,
+    #ffb31e
+  );
+
+  border: 5px solid #a65716;
+  border-radius: 18px;
+
+  box-shadow:
+    0 6px 0 rgba(112, 52, 12, 0.35),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.clock {
+  font-size: 51px;
+}
+
+.timer-card div:last-child {
+  flex: 1;
+  text-align: center;
+}
+
+.timer-card span {
+  display: block;
+
+  color: #17274d;
+
+  font-size: 14px;
+  font-weight: 1000;
+}
+
+.timer-card strong {
+  display: block;
+
+  color: #092a7b;
+
+  font-size: 36px;
+  line-height: 1;
+}
+
+/* ================================
+   PEÇAS
+================================ */
+
+.pieces-card {
+  position: absolute;
+  z-index: 4;
+
+  right: 2.4vw;
+  bottom: 5vh;
+
+  width: min(340px, 27vw);
+
+  padding: 17px;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border: 5px solid #0b62c3;
+  border-radius: 24px;
+
+  box-shadow:
+    0 7px 0 rgba(5, 50, 118, 0.35),
+    0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.pieces-title {
+  font-size: clamp(13px, 1.1vw, 18px);
+  font-weight: 1000;
+}
+
+.pieces-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin: 7px 0;
+}
+
+.puzzle-icon {
+  font-size: 43px;
+}
+
+.pieces-count strong {
+  font-size: clamp(38px, 3.4vw, 58px);
+  line-height: 1;
+
+  color: #0b3d9a;
+}
+
+.pieces-count > span:last-child {
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.progress {
+  height: 17px;
+
+  margin: 10px 0;
+
+  overflow: hidden;
+
+  background: #d4d4d4;
+
+  border-radius: 100px;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #00a9f4,
+    #0878df
+  );
+
+  border-radius: inherit;
+
+  transition: width 0.4s ease;
+}
+
+.message {
+  margin-top: 13px;
+
+  padding: 11px;
+
+  background: #0b3f99;
+
+  border-radius: 12px;
+
+  color: white;
+
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* ================================
+   FULL HD
+================================ */
+
+@media (min-width: 1700px) {
+
+  .clue {
+    min-height: 34px;
+  }
+
+  .clue-number {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .pieces-card {
+    width: 370px;
+  }
+
+  .timer-card {
+    min-width: 260px;
+  }
+}
+
+/* =========================================
+   ESTADOS DO JOGO
+========================================= */
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.message strong {
+  font-size: 16px;
+}
+
+.message span {
+  font-size: 13px;
+}
+
+.message-completo {
+  background: #159447;
+  animation: pulse-message 1.1s infinite;
+}
+
+.message-erro {
+  background: #e98416;
+}
+
+.message-retirada {
+  background: #7637b9;
+}
+
+.state-completo .pieces-card {
+  border-color: #19a74f;
+  animation: complete-card 1.1s infinite;
+}
+
+.state-completo .progress-fill {
+  background: linear-gradient(
+    90deg,
+    #36d768,
+    #139d45
+  );
+}
+
+.state-retirada .progress-fill {
+  background: linear-gradient(
+    90deg,
+    #a765e6,
+    #7133b2
+  );
+}
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.feedback-overlay {
+  position: absolute;
+  z-index: 50;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  animation: overlay-in 0.35s ease;
+}
+
+.feedback-overlay::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: rgba(8, 44, 86, 0.35);
+  backdrop-filter: blur(3px);
+}
+
+.feedback-box {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  border-radius: 32px;
+
+  box-shadow:
+    0 12px 0 rgba(3, 47, 112, 0.35),
+    0 25px 60px rgba(0, 0, 0, 0.28);
+
+  animation: box-in 0.45s
+    cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+/* =========================================
+   ERRO
+========================================= */
+
+.error-feedback::before {
+  background: rgba(27, 64, 105, 0.3);
+}
+
+.error-box {
+  width: min(570px, 80vw);
+
+  padding: 35px 45px;
+
+  background: linear-gradient(
+    #fff9e7,
+    #ffffff
+  );
+
+  border: 7px solid #ef951f;
+}
+
+.feedback-icon {
+  font-size: 70px;
+  line-height: 1;
+}
+
+.error-box > span {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #d57912;
+
+  font-size: 18px;
+  font-weight: 1000;
+  letter-spacing: 3px;
+}
+
+.error-box h2 {
+  margin: 7px 0 12px;
+
+  color: #173c86;
+
+  font-size: 35px;
+}
+
+.error-box p {
+  margin: 0;
+
+  color: #37527d;
+
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* =========================================
+   VITÓRIA
+========================================= */
+
+.victory-feedback::before {
+  background: rgba(3, 57, 106, 0.25);
+}
+
+.victory-box {
+  width: min(680px, 84vw);
+
+  padding: 32px 50px 38px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffde7,
+      #ffffff
+    );
+
+  border: 8px solid #1ca851;
+}
+
+.victory-stars {
+  color: #ffb20f;
+
+  font-size: 35px;
+
+  letter-spacing: 12px;
+
+  animation: stars 0.8s infinite alternate;
+}
+
+.victory-box > span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #159347;
+
+  font-size: 20px;
+  font-weight: 1000;
+
+  letter-spacing: 4px;
+}
+
+.victory-box h2 {
+  margin: 6px 0;
+
+  color: #0c3d91;
+
+  font-size: clamp(36px, 4vw, 57px);
+  line-height: 1;
+}
+
+.victory-box > p {
+  margin: 15px 0;
+
+  color: #37527d;
+
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.victory-stats {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+
+  margin: 22px 0;
+}
+
+.victory-stats > div {
+  min-width: 150px;
+
+  padding: 11px 24px;
+
+  background: #edf7ff;
+
+  border: 3px solid #1184dc;
+  border-radius: 17px;
+}
+
+.victory-stats span {
+  display: block;
+
+  color: #59749b;
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.victory-stats strong {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #0b3d94;
+
+  font-size: 29px;
+}
+
+.remove-warning {
+  padding: 13px 20px;
+
+  background: #7839b9;
+
+  border-radius: 14px;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* =========================================
+   CONFETES
+========================================= */
+
+.confetti {
+  position: absolute;
+  z-index: 3;
+
+  color: #ffd21c;
+
+  font-size: 35px;
+
+  animation: float-confetti 1.4s infinite alternate;
+}
+
+.confetti-one {
+  left: 16%;
+  top: 19%;
+}
+
+.confetti-two {
+  right: 17%;
+  top: 23%;
+  color: #f34c4c;
+}
+
+.confetti-three {
+  left: 22%;
+  bottom: 18%;
+  color: #35d16e;
+}
+
+.confetti-four {
+  right: 21%;
+  bottom: 16%;
+  color: #3f8eff;
+}
+
+/* =========================================
+   CONTROLES DE DESENVOLVIMENTO
+========================================= */
+
+.dev-controls {
+  position: absolute;
+  z-index: 100;
+
+  left: 50%;
+  bottom: 7px;
+
+  transform: translateX(-50%);
+
+  padding: 5px 14px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  border-radius: 100px;
+
+  color: white;
+
+  font-size: 11px;
+
+  opacity: 0.75;
+}
+
+/* =========================================
+   ANIMAÇÕES
+========================================= */
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes box-in {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes complete-card {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes pulse-message {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0
+      rgba(35, 200, 93, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px
+      rgba(35, 200, 93, 0.2);
+  }
+}
+
+@keyframes stars {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes float-confetti {
+  from {
+    transform:
+      translateY(-8px)
+      rotate(-10deg);
+  }
+
+  to {
+    transform:
+      translateY(10px)
+      rotate(12deg);
+  }
+}
+
+/* =========================================
+   TELA INICIAL
+========================================= */
+
+.start-screen {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding-top: 80px;
+}
+
+.start-card {
+  width: min(570px, 80vw);
+
+  padding: 35px 50px;
+
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border: 7px solid #0874d1;
+  border-radius: 32px;
+
+  box-shadow:
+    0 9px 0 rgba(4, 62, 129, 0.35),
+    0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.start-icon {
+  font-size: 65px;
+}
+
+.start-card > span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #e48819;
+
+  font-size: 15px;
+  font-weight: 1000;
+  letter-spacing: 3px;
+}
+
+.start-card h2 {
+  margin: 5px 0 15px;
+
+  color: #0b3e95;
+
+  font-size: 42px;
+}
+
+.start-card p {
+  color: #37527d;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.start-card button {
+  margin-top: 15px;
+
+  padding: 16px 32px;
+
+  border: 4px solid #9c5517;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    #ffd45a,
+    #f2a31f
+  );
+
+  color: #16356d;
+
+  font-size: 18px;
+  font-weight: 1000;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 0 #9c5517;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.start-card button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 7px 0 #9c5517;
+}
+
+.start-card button:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 1px 0 #9c5517;
+}
+
+.puzzle-name {
+  position: absolute;
+
+  top: 12px;
+  right: 18px;
+
+  color: #5d78a0;
+
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}

@@ -1,0 +1,1 @@
+"""Integracao NFC do jogo."""
